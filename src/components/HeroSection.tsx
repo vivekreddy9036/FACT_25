@@ -1,12 +1,15 @@
 import { Button } from "@/components/ui/button";
+import { ScrollingLogo } from "@/components/ScrollingLogo";
+
 
 interface HeroSectionProps {
   onEnterCase: () => void;
 }
 
 export function HeroSection({ onEnterCase }: HeroSectionProps) {
-  return (
+  return (<>
     <section className="min-h-screen flex flex-col items-center justify-center relative cyber-grid">
+      <ScrollingLogo />
       <div className="text-center space-y-8 max-w-4xl mx-auto px-4 animate-fade-in">
         <div className="space-y-4">
           <h1 className="text-5xl md:text-7xl font-orbitron font-black bg-gradient-to-r from-primary via-forensic-red to-secondary bg-clip-text text-transparent animate-glow-pulse">
@@ -37,5 +40,6 @@ export function HeroSection({ onEnterCase }: HeroSectionProps) {
         <p>FACT    Forensic Analysis Club & Triage</p>
       </footer>
     </section>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { motion, Variants, easeOut } from "framer-motion";
+import { ScrollingLogo } from "./ScrollingLogo";
 
 interface CaseBriefProps {
   onAcceptMission: () => void;
@@ -51,6 +52,7 @@ export function CaseBrief({ onAcceptMission }: CaseBriefProps) {
 
   return (
     <section className="min-h-screen flex flex-col items-center justify-center relative cyber-grid px-4">
+      <ScrollingLogo />
       <div className="max-w-4xl w-full space-y-8">
         {/* Header */}
         <div className="text-center space-y-4">
@@ -86,7 +88,15 @@ export function CaseBrief({ onAcceptMission }: CaseBriefProps) {
         {showButton && (
           <div className="text-center">
             <Button
-              onClick={onAcceptMission}
+              onClick={() => {
+                try {
+                  // store the click timestamp (ms since epoch) as startTime
+                  localStorage.setItem("startTime", String(Date.now()));
+                } catch (e) {
+                  // ignore storage errors (e.g., private mode) and proceed
+                }
+                onAcceptMission();
+              }}
               size="lg"
               className="font-orbitron font-semibold text-lg px-8 py-4 glow-primary hover:glow-primary transition-all duration-300"
             >

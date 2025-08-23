@@ -24,7 +24,7 @@ interface FormData {
 }
 
 const SUBMIT_URL =
-  "https://script.google.com/macros/s/AKfycbz9aWSkQyK77URHkmJ4fQfypTZMIgGK25E7glUZkYa_DCkPYOxf0yY2o1oYo1L5dnq_/exec";
+  "https://script.google.com/macros/s/AKfycbyWH5cLoq7JHmzpP6PBlSo7JhfwO30FoMOxvT4IaWg9BLunFOLD91F_KHcWpqQYTjeukQ/exec";
 
 export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
   const [formData, setFormData] = useState<FormData>({
@@ -91,8 +91,21 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
     const ts = document.createElement("input");
     ts.type = "hidden";
     ts.name = "timestamp";
-    ts.value = new Date().toISOString();
+    const now = new Date();
+    const formattedTimestamp = `${now.getMonth() + 1}/${now.getDate()}/${now.getFullYear()} ${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`;
+    ts.value = formattedTimestamp;
     form.appendChild(ts);
+
+    const startTime = localStorage.getItem("startTime");
+    if (startTime) {
+      const startTimeInput = document.createElement("input");
+      startTimeInput.type = "hidden";
+      startTimeInput.name = "startTime";
+      const startDate = new Date(parseInt(startTime));
+      const formattedStartTime = `${startDate.getMonth() + 1}/${startDate.getDate()}/${startDate.getFullYear()} ${startDate.getHours().toString().padStart(2, "0")}:${startDate.getMinutes().toString().padStart(2, "0")}:${startDate.getSeconds().toString().padStart(2, "0")}`;
+      startTimeInput.value = formattedStartTime;
+      form.appendChild(startTimeInput);
+    }
 
     document.body.appendChild(form);
     form.submit();
@@ -103,7 +116,7 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
 
     toast({
       title: "Success",
-      description: "Report submitted to Google Sheets. Thank you!",
+      description: "Report submitted to us. Thank you!, please wait to hear back from us.",
     });
   };
 
@@ -152,7 +165,7 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
                 {/* Conclusion */}
                 <div className="space-y-3">
                   <Label className="text-base font-semibold">
-                    Primary Conclusion
+                    Based on the evidence provided, who is most likely responsible for the Falcon Corp breach? *
                   </Label>
                   <RadioGroup
                     value={formData.conclusion}
@@ -181,7 +194,7 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
                 {/* Reasoning */}
                 <div className="space-y-3">
                   <Label htmlFor="reasoning" className="text-base font-semibold">
-                    Reasoning (4–6 bullet points) *
+                    Justify Your Reasoning (4-6 bullet points) *
                   </Label>
                   <Textarea
                     id="reasoning"
@@ -210,7 +223,7 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
+                    <Label htmlFor="email">Email (Please use the mail to which you received this) *</Label>
                     <Input
                       id="email"
                       type="email"

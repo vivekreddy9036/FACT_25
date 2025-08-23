@@ -3,8 +3,6 @@ import { HeroSection } from "@/components/HeroSection";
 import { CaseBrief } from "@/components/CaseBrief";
 import { EvidenceDashboard } from "@/components/EvidenceDashboard";
 import { SubmissionPanel } from "@/components/SubmissionPanel";
-import { Timer } from "@/components/Timer";
-import { ScrollingLogo } from "@/components/ScrollingLogo";
 
 const Index = () => {
   const [currentSection, setCurrentSection] = useState<'hero' | 'brief' | 'evidence'>('hero');
@@ -24,9 +22,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <ScrollingLogo />
-      {currentSection === 'evidence' && <Timer />}
-      
+     
       {currentSection === 'hero' && (
         <HeroSection onEnterCase={handleEnterCase} />
       )}
