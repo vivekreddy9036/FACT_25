@@ -5,14 +5,15 @@ export function ScrollingLogo() {
       style={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
-        height: "100%", // or a fixed height if needed
+        alignItems: "flex-start",
+        height: "100%",
+        marginTop: "-2rem"
       }}
     >
       <img
-        src="/Fact_Logo.png"
-        alt="FACT - Forensic Analysis Club & Triage"
-        style={{ width: "10%", height: "10%", objectFit: "contain" }}
+        src="/new_home_logo.png"
+        alt="FACT - Forensic Analysis Club & Triage Home Logo"
+        style={{ width: "50%", height: "50%", objectFit: "contain" }}
       />
     </div>
   );
