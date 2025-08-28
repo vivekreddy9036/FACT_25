@@ -82,7 +82,7 @@ export function EvidenceDashboard({ onAllEvidenceViewed }: EvidenceDashboardProp
 
   return (
     <section className="min-h-screen py-16 cyber-grid">
-      <ScrollingLogo />
+  <ScrollingLogo size="20%" />
       <div className="max-w-6xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-3xl md:text-4xl font-orbitron font-bold bg-gradient-to-r from-primary to-forensic-red bg-clip-text text-transparent">

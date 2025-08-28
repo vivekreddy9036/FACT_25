@@ -1,4 +1,8 @@
-export function ScrollingLogo() {
+interface ScrollingLogoProps {
+  size?: string | number;
+}
+
+export function ScrollingLogo({ size = "50%" }: ScrollingLogoProps) {
   return (
     <div
       className="scrolling-logo"
@@ -13,7 +17,7 @@ export function ScrollingLogo() {
       <img
         src="/new_home_logo.png"
         alt="FACT - Forensic Analysis Club & Triage Home Logo"
-        style={{ width: "50%", height: "50%", objectFit: "contain" }}
+        style={{ width: size, height: size, objectFit: "contain" }}
       />
     </div>
   );
