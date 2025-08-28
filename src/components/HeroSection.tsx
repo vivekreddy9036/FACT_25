@@ -4,9 +4,10 @@ import { ScrollingLogo } from "@/components/ScrollingLogo";
 
 interface HeroSectionProps {
   onEnterCase: () => void;
+  isSubmitted?: boolean;
 }
 
-export function HeroSection({ onEnterCase }: HeroSectionProps) {
+export function HeroSection({ onEnterCase, isSubmitted = false }: HeroSectionProps) {
   return (<>
     <section className="min-h-screen flex flex-col items-center justify-center relative cyber-grid">
       <ScrollingLogo />
@@ -26,12 +27,13 @@ export function HeroSection({ onEnterCase }: HeroSectionProps) {
             Falcon Corp has been breached. You've been called to investigate.
           </p>
           
-          <Button 
+          <Button
             onClick={onEnterCase}
             size="lg"
+            disabled={isSubmitted}
             className="font-orbitron font-semibold text-lg px-8 py-6 bg-gradient-to-r from-primary to-forensic-red hover:from-forensic-red hover:to-primary transition-all duration-300 glitch shadow-lg shadow-primary/50"
           >
-            Enter Case File
+            {isSubmitted ? 'Already Submitted' : 'Enter Case File'}
           </Button>
         </div>
       </div>

@@ -17,10 +17,17 @@ const Index = () => {
   }, []);
 
   const handleEnterCase = () => {
-    setCurrentSection('brief');
+    // If user already has a startTime in localStorage, jump straight to evidence
+    const startTime = localStorage.getItem('startTime');
+    if (startTime) {
+      setCurrentSection('evidence');
+    } else {
+      setCurrentSection('brief');
+    }
   };
 
   const handleAcceptMission = () => {
+    // startTime must only be created by the Accept Mission button in CaseBrief
     setCurrentSection('evidence');
   };
 
@@ -63,7 +70,7 @@ const Index = () => {
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-background text-foreground">
-        <HeroSection onEnterCase={() => {}} />
+        <HeroSection onEnterCase={() => {}} isSubmitted={isSubmitted} />
       </div>
     );
   }
@@ -71,7 +78,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {currentSection === 'hero' && (
-        <HeroSection onEnterCase={handleEnterCase} />
+        <HeroSection onEnterCase={handleEnterCase} isSubmitted={isSubmitted} />
       )}
       {currentSection === 'brief' && (
         <CaseBrief onAcceptMission={handleAcceptMission} />
