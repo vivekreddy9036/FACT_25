@@ -11,6 +11,8 @@ import { Loader2, Send } from "lucide-react";
 
 interface SubmissionPanelProps {
   isEnabled: boolean;
+  onSubmitted?: () => void;
+  isSubmitted?: boolean;
 }
 
 interface FormData {
@@ -26,7 +28,7 @@ interface FormData {
 const SUBMIT_URL =
   "https://script.google.com/macros/s/AKfycbyWH5cLoq7JHmzpP6PBlSo7JhfwO30FoMOxvT4IaWg9BLunFOLD91F_KHcWpqQYTjeukQ/exec";
 
-export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
+export function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: SubmissionPanelProps) {
   const [formData, setFormData] = useState<FormData>({
     conclusion: "",
     reasoning: "",
@@ -37,7 +39,7 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
     consent: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // isSubmitted is now controlled from parent
   const { toast } = useToast();
 
   const conclusions = [
@@ -112,7 +114,7 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
     document.body.removeChild(form);
 
     setIsSubmitting(false);
-    setIsSubmitted(true);
+  if (onSubmitted) onSubmitted();
 
     toast({
       title: "Success",
@@ -137,7 +139,13 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
   }
 
   return (
-    <section className="py-16 cyber-grid">
+    <section
+      className={
+        isSubmitted
+          ? "py-16 cyber-grid bg-background min-h-screen"
+          : "py-16 cyber-grid"
+      }
+    >
       <div className="max-w-2xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-3xl md:text-4xl font-orbitron font-bold bg-gradient-to-r from-primary to-forensic-red bg-clip-text text-transparent">
@@ -152,9 +160,9 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
               Case Analysis Report
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className={isSubmitted ? "flex flex-col justify-center items-center min-h-[300px] space-y-6" : "space-y-6"}>
             {isSubmitted ? (
-              <div className="text-center py-12">
+              <div className="text-center">
                 <h3 className="text-2xl font-bold text-green-400 mb-4">Thank you for your submission!</h3>
                 <p className="text-lg text-muted-foreground">
                   Your report has been received. Good luck, Investigator.

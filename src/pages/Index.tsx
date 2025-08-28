@@ -7,6 +7,7 @@ import { SubmissionPanel } from "@/components/SubmissionPanel";
 const Index = () => {
   const [currentSection, setCurrentSection] = useState<'hero' | 'brief' | 'evidence'>('hero');
   const [allEvidenceViewed, setAllEvidenceViewed] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleEnterCase = () => {
     setCurrentSection('brief');
@@ -16,8 +17,13 @@ const Index = () => {
     setCurrentSection('evidence');
   };
 
+
   const handleAllEvidenceViewed = (viewed: boolean) => {
     setAllEvidenceViewed(viewed);
+  };
+
+  const handleSubmitted = () => {
+    setIsSubmitted(true);
   };
 
   return (
@@ -33,8 +39,10 @@ const Index = () => {
       
       {currentSection === 'evidence' && (
         <>
-          <EvidenceDashboard onAllEvidenceViewed={handleAllEvidenceViewed} />
-          <SubmissionPanel isEnabled={allEvidenceViewed} />
+          {!isSubmitted && (
+            <EvidenceDashboard onAllEvidenceViewed={handleAllEvidenceViewed} />
+          )}
+          <SubmissionPanel isEnabled={allEvidenceViewed} onSubmitted={handleSubmitted} isSubmitted={isSubmitted} />
         </>
       )}
     </div>
