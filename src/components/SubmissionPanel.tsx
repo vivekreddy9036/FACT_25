@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,7 +28,7 @@ interface FormData {
 const SUBMIT_URL =
   "https://script.google.com/macros/s/AKfycbyWH5cLoq7JHmzpP6PBlSo7JhfwO30FoMOxvT4IaWg9BLunFOLD91F_KHcWpqQYTjeukQ/exec";
 
-export function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: SubmissionPanelProps) {
+function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: SubmissionPanelProps) {
   const [formData, setFormData] = useState<FormData>({
     conclusion: "",
     reasoning: "",
@@ -39,8 +39,14 @@ export function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: Submiss
     consent: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // isSubmitted is now controlled from parent
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (localStorage.getItem('fact_isSubmitted') === 'true') {
+      setAlreadySubmitted(true);
+    }
+  }, []);
 
   const conclusions = [
     { value: "Krishn", label: "Krishn" },
@@ -114,7 +120,9 @@ export function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: Submiss
     document.body.removeChild(form);
 
     setIsSubmitting(false);
-  if (onSubmitted) onSubmitted();
+    localStorage.setItem('fact_isSubmitted', 'true');
+    setAlreadySubmitted(true);
+    if (onSubmitted) onSubmitted();
 
     toast({
       title: "Success",
@@ -122,14 +130,16 @@ export function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: Submiss
     });
   };
 
-  if (!isEnabled) {
+  if (!isEnabled || alreadySubmitted) {
     return (
       <section className="py-16">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <Card className="border-muted">
             <CardContent className="pt-6">
               <p className="text-muted-foreground">
-                Review all evidence to unlock the submission panel
+                {alreadySubmitted
+                  ? "You have already submitted your report. Further submissions are not allowed."
+                  : "Review all evidence to unlock the submission panel"}
               </p>
             </CardContent>
           </Card>
@@ -314,3 +324,5 @@ export function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: Submiss
     </section>
   );
 }
+
+export { SubmissionPanel };

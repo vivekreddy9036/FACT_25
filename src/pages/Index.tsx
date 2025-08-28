@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { CaseBrief } from "@/components/CaseBrief";
 import { EvidenceDashboard } from "@/components/EvidenceDashboard";
@@ -8,6 +8,13 @@ const Index = () => {
   const [currentSection, setCurrentSection] = useState<'hero' | 'brief' | 'evidence'>('hero');
   const [allEvidenceViewed, setAllEvidenceViewed] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // On mount, sync isSubmitted with localStorage
+  useEffect(() => {
+    if (localStorage.getItem('fact_isSubmitted') === 'true') {
+      setIsSubmitted(true);
+    }
+  }, []);
 
   const handleEnterCase = () => {
     setCurrentSection('brief');
@@ -26,22 +33,26 @@ const Index = () => {
     setIsSubmitted(true);
   };
 
+  // If submitted, always show only the hero section (page 1), block navigation to other pages
+  if (isSubmitted) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
+        <HeroSection onEnterCase={() => {}} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground">
-     
       {currentSection === 'hero' && (
         <HeroSection onEnterCase={handleEnterCase} />
       )}
-      
       {currentSection === 'brief' && (
         <CaseBrief onAcceptMission={handleAcceptMission} />
       )}
-      
       {currentSection === 'evidence' && (
         <>
-          {!isSubmitted && (
-            <EvidenceDashboard onAllEvidenceViewed={handleAllEvidenceViewed} />
-          )}
+          <EvidenceDashboard onAllEvidenceViewed={handleAllEvidenceViewed} />
           <SubmissionPanel isEnabled={allEvidenceViewed} onSubmitted={handleSubmitted} isSubmitted={isSubmitted} />
         </>
       )}
