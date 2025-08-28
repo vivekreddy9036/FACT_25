@@ -158,24 +158,20 @@ function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: SubmissionPane
     >
       <div className="max-w-2xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-4">
-          <h2 className="text-3xl md:text-4xl font-orbitron font-bold bg-gradient-to-r from-primary to-forensic-red bg-clip-text text-transparent">
-            Submit Findings
-          </h2>
-          <div className="h-px w-24 bg-gradient-to-r from-primary to-forensic-red mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-[#ff3c3c] tracking-wide" style={{letterSpacing: '0.04em'}}>Submit Findings</h2>
+          <div className="h-px w-24 bg-gradient-to-r from-[#ff3c3c] to-[#ff3c3c] mx-auto"></div>
         </div>
 
-        <Card className="border-primary/30 bg-card/80 backdrop-blur-sm animate-slide-up">
+        <Card className="border border-neutral-700 bg-[#18171c]/95 shadow-lg animate-slide-up">
           <CardHeader>
-            <CardTitle className="font-orbitron text-xl text-center">
-              Case Analysis Report
-            </CardTitle>
+            <CardTitle className="font-orbitron text-2xl text-white text-center tracking-wide">Case Analysis Report</CardTitle>
           </CardHeader>
           <CardContent className={isSubmitted ? "flex flex-col justify-center items-center min-h-[300px] space-y-6" : "space-y-6"}>
             {isSubmitted ? (
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-green-400 mb-4">Thank you for your submission!</h3>
-                <p className="text-lg text-muted-foreground">
-                  Your report has been received. Good luck, Investigator.
+                <h3 className="text-2xl md:text-3xl font-bold mb-4" style={{color:'#1aff89'}}>Thank you for your submission!</h3>
+                <p className="text-lg text-gray-300 tracking-wide" style={{letterSpacing: '0.02em'}}>
+                  YOUR REPORT HAS BEEN RECEIVED. GOOD LUCK, INVESTIGATOR.
                 </p>
               </div>
             ) : (

@@ -29,15 +29,41 @@ const Index = () => {
     setAllEvidenceViewed(viewed);
   };
 
+  // Remove old handleSubmitted, use the new one below that sets justSubmitted
+
+  // Track if this is the first render after submit (not a refresh)
+  const [justSubmitted, setJustSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('fact_isSubmitted') === 'true') {
+      setIsSubmitted(true);
+      // If not just submitted, force hero page
+      if (!justSubmitted) {
+        setCurrentSection('hero');
+      }
+    }
+    // eslint-disable-next-line
+  }, []);
+
   const handleSubmitted = () => {
     setIsSubmitted(true);
+    setJustSubmitted(true);
   };
 
-  // If submitted, show only the SubmissionPanel in thank you mode, block all other navigation
-  if (isSubmitted) {
+  // If just submitted, show thank you page
+  if (justSubmitted) {
     return (
       <div className="min-h-screen bg-background text-foreground">
         <SubmissionPanel isEnabled={false} isSubmitted={true} />
+      </div>
+    );
+  }
+
+  // If already submitted (on refresh), show only hero page
+  if (isSubmitted) {
+    return (
+      <div className="min-h-screen bg-background text-foreground">
+        <HeroSection onEnterCase={() => {}} />
       </div>
     );
   }
