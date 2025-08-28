@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,6 +40,7 @@ function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: SubmissionPane
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -116,18 +117,64 @@ function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: SubmissionPane
     }
 
     document.body.appendChild(form);
+    // If we have a ref to the hidden iframe, wait for its load event to mark success.
+    const iframe = iframeRef.current || document.getElementsByName("hidden_iframe")?.[0] as HTMLIFrameElement | undefined;
+
+    let handled = false;
+    const cleanup = () => {
+      try {
+        if (form.parentNode) form.parentNode.removeChild(form);
+      } catch (err) {
+        // ignore
+      }
+      if (iframe) {
+        try {
+          iframe.removeEventListener("load", onLoad);
+        } catch (err) {
+          // ignore
+        }
+      }
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+
+    const onLoad = () => {
+      if (handled) return;
+      handled = true;
+      setIsSubmitting(false);
+      localStorage.setItem('fact_isSubmitted', 'true');
+      setAlreadySubmitted(true);
+      if (onSubmitted) onSubmitted();
+
+      toast({
+        title: "Success",
+        description: "Report submitted to us. Thank you!, please wait to hear back from us.",
+      });
+
+      cleanup();
+    };
+
+    // Fallback timeout if iframe doesn't load (network error or blocked)
+    const timeoutId = window.setTimeout(() => {
+      if (handled) return;
+      handled = true;
+      setIsSubmitting(false);
+      toast({
+        title: "Submission timed out",
+        description: "We could not confirm submission. Please try again or contact the organizers.",
+        variant: "destructive",
+      });
+      cleanup();
+    }, 10000);
+
+    if (iframe) {
+      try {
+        iframe.addEventListener("load", onLoad);
+      } catch (err) {
+        // ignore and rely on timeout
+      }
+    }
+
     form.submit();
-    document.body.removeChild(form);
-
-    setIsSubmitting(false);
-    localStorage.setItem('fact_isSubmitted', 'true');
-    setAlreadySubmitted(true);
-    if (onSubmitted) onSubmitted();
-
-    toast({
-      title: "Success",
-      description: "Report submitted to us. Thank you!, please wait to hear back from us.",
-    });
   };
 
   if (!isEnabled || alreadySubmitted) {
@@ -316,7 +363,7 @@ function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: SubmissionPane
       </div>
 
       {/* Hidden iframe for form submission */}
-      <iframe name="hidden_iframe" style={{ display: "none" }} />
+      <iframe ref={iframeRef} name="hidden_iframe" style={{ display: "none" }} />
     </section>
   );
 }
