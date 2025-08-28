@@ -33,11 +33,11 @@ const Index = () => {
     setIsSubmitted(true);
   };
 
-  // If submitted, always show only the hero section (page 1), block navigation to other pages
+  // If submitted, show only the SubmissionPanel in thank you mode, block all other navigation
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-background text-foreground">
-        <HeroSection onEnterCase={() => {}} />
+        <SubmissionPanel isEnabled={false} isSubmitted={true} />
       </div>
     );
   }
