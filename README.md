@@ -1,4 +1,4 @@
-# FACT 2025 Recruitment Portal
+# 🔍 FACT 2025 Recruitment Portal
 
 <div align="center">
 
@@ -274,4 +274,3 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 *Empowering the next generation of cybersecurity professionals*
 
 </div>
-
