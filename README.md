@@ -1,15 +1,10 @@
-# 🔍 FACT 2025 Recruitment Portal
+# 🔍 FACT 2025 Recruitment Portal  
 
 <div align="center">
 
 ![FACT Logo](./Fact_Logo.png)
 
-**An immersive detective-themed recruitment portal for FACT Community - Forensics and CyberSecurity Club**
-
-[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.4.19-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.17-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+**An immersive detective-themed recruitment portal by the FACT Community (Forensics and CyberSecurity Club).**
 
 [🚀 Live Demo](https://fact-amrita.github.io/FACT_25_recruitment) • [📖 Documentation](#documentation) • [🤝 Contributing](#contributing)
 
@@ -17,37 +12,51 @@
 
 ---
 
-## 📖 About
+## 📖 About  
 
-The FACT 2025 Recruitment Portal is an interactive web experience designed to recruit new members from the 2025 batch for the **FACT Community** (Forensics and CyberSecurity Club). The application features a unique detective-themed interface where candidates solve cases and submit evidence, creating an engaging recruitment process that reflects the club's focus on forensics and cybersecurity.
+The **FACT 2025 Recruitment Portal** is an interactive web application designed to onboard new members of the FACT Community. Built with a detective-themed interface, it challenges candidates to solve cases and submit evidence—making recruitment engaging and reflective of our focus on **forensics and cybersecurity**.  
 
-### ✨ Key Features
+### ✨ Key Features  
 
-- 🕵️ **Interactive Case-Based Interface** - Solve mysteries and gather evidence
-- ⏱️ **Real-time Timer System** - Track progress with dynamic countdowns
-- 📊 **Evidence Dashboard** - Comprehensive case file management
-- 📱 **Responsive Design** - Seamless experience across all devices
-- 🎨 **Modern UI/UX** - Clean, professional interface with smooth animations
-- 🔒 **Form Validation** - Robust submission handling with Zod validation
-- 💾 **Local Storage** - Persistent state management
-- 🌙 **Theme Support** - Dark/light mode compatibility
+- 🕵️ **Case-Based Interface** – Solve mysteries and gather evidence  
+- ⏱️ **Real-time Timer** – Track progress dynamically  
+- 📊 **Evidence Dashboard** – Manage case files effectively  
+- 📱 **Responsive Design** – Optimized across devices  
+- 🎨 **Modern UI/UX** – Smooth, professional interface  
+- 🔒 **Secure Forms** – Robust validation and handling  
+- 🌙 **Dark/Light Mode** – Theme adaptability  
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack  
 
-### Core Technologies
+- **React 18** – Frontend framework  
+- **TypeScript 5** – Type-safe development  
+- **Vite** – Fast build tool & dev server  
+- **Tailwind CSS** – Utility-first styling  
+- **shadcn/ui + Radix UI** – Modern, accessible components  
+- **Framer Motion** – Animations  
+- **React Hook Form + Zod** – Form management & validation  
+- **TanStack Query** – Data synchronization  
+- **Recharts** – Visualization  
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **React** | 18.3.1 | Frontend framework for building interactive UIs |
-| **TypeScript** | 5.8.3 | Type-safe JavaScript for better development experience |
-| **Vite** | 5.4.19 | Fast build tool and development server |
-| **React Router DOM** | 6.30.1 | Client-side routing and navigation |
+Deployment via **GitHub Pages** with **SWC** compilation.  
 
-### UI & Styling
+---
 
-| Library | Version | Purpose |
+## 🚀 Getting Started  
+
+### Prerequisites  
+- Node.js v16+  
+- npm or yarn  
+- Git  
+
+### Installation  
+```bash
+git clone https://github.com/fact-amrita/FACT_25_recruitment.git
+cd FACT_25_recruitment
+npm install
+npm run dev
 |---------|---------|---------|
 | **Tailwind CSS** | 3.4.17 | Utility-first CSS framework |
 | **shadcn/ui** | Latest | Modern React component library |
