@@ -1,270 +1,128 @@
-# 🔍 FACT 2025 Recruitment Portal  # 🔍 FACT 2025 Recruitment Portal  
+# 🔍 FACT 2025 Recruitment Portal
 
+<div align="center">
 
+![FACT Logo](./Fact_Logo.png)
 
-<div align="center"><div align="center">
+**An immersive detective-themed recruitment portal for FACT Community - Forensics and CyberSecurity Club**
 
+[![React](https://img.shields.io/badge/React-18.3.1-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.3-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.4.19-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.17-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
+[🚀 Live Demo](https://fact-amrita.github.io/FACT_25_recruitment) • [📖 Documentation](#documentation) • [🤝 Contributing](#contributing)
 
-![FACT Logo](./Fact_Logo.png)![FACT Logo](./Fact_Logo.png)
-
-
-
-**An immersive detective-themed recruitment portal by the FACT Community (Forensics and CyberSecurity Club).****An immersive detective-themed recruitment portal by the FACT Community (Forensics and CyberSecurity Club).**
-
-
-
-[🚀 Live Demo](https://fact-amrita.github.io/FACT_25_recruitment) • [📖 Documentation](#documentation) • [🤝 Contributing](#contributing)[🚀 Live Demo](https://fact-amrita.github.io/FACT_25_recruitment) • [📖 Documentation](#documentation) • [🤝 Contributing](#contributing)
-
-
-
-</div></div>
-
-
-
-------
-
-
-
-## 📖 About  ## 📖 About  
-
-
-
-The **FACT 2025 Recruitment Portal** is an interactive web application designed to onboard new members of the FACT Community. Built with a detective-themed interface, it challenges candidates to solve cases and submit evidence—making recruitment engaging and reflective of our focus on **forensics and cybersecurity**.  The **FACT 2025 Recruitment Portal** is an interactive web application designed to onboard new members of the FACT Community. Built with a detective-themed interface, it challenges candidates to solve cases and submit evidence—making recruitment engaging and reflective of our focus on **forensics and cybersecurity**.  
-
-
-
-### ✨ Key Features  ### ✨ Key Features  
-
-
-
-- 🕵️ **Case-Based Interface** – Solve mysteries and gather evidence  - 🕵️ **Case-Based Interface** – Solve mysteries and gather evidence  
-
-- ⏱️ **Real-time Timer** – Track progress dynamically  - ⏱️ **Real-time Timer** – Track progress dynamically  
-
-- 📊 **Evidence Dashboard** – Manage case files effectively  - 📊 **Evidence Dashboard** – Manage case files effectively  
-
-- 📱 **Responsive Design** – Optimized across devices  - 📱 **Responsive Design** – Optimized across devices  
-
-- 🎨 **Modern UI/UX** – Smooth, professional interface  - 🎨 **Modern UI/UX** – Smooth, professional interface  
-
-- 🔒 **Secure Forms** – Robust validation and handling  - 🔒 **Secure Forms** – Robust validation and handling  
-
-- 🌙 **Dark/Light Mode** – Theme adaptability  - 🌙 **Dark/Light Mode** – Theme adaptability  
-
-
-
-------
-
-
-
-## 🛠️ Tech Stack  ## 🛠️ Tech Stack  
-
-
-
-- **React 18** – Frontend framework  - **React 18** – Frontend framework  
-
-- **TypeScript 5** – Type-safe development  - **TypeScript 5** – Type-safe development  
-
-- **Vite** – Fast build tool & dev server  - **Vite** – Fast build tool & dev server  
-
-- **Tailwind CSS** – Utility-first styling  - **Tailwind CSS** – Utility-first styling  
-
-- **shadcn/ui + Radix UI** – Modern, accessible components  - **shadcn/ui + Radix UI** – Modern, accessible components  
-
-- **Framer Motion** – Animations  - **Framer Motion** – Animations  
-
-- **React Hook Form + Zod** – Form management & validation  - **React Hook Form + Zod** – Form management & validation  
-
-- **TanStack Query** – Data synchronization  - **TanStack Query** – Data synchronization  
-
-- **Recharts** – Visualization  - **Recharts** – Visualization  
-
-
-
-Deployment via **GitHub Pages** with **SWC** compilation.  Deployment via **GitHub Pages** with **SWC** compilation.  
-
-
-
-------
-
-
-
-## 🚀 Getting Started  ## 🚀 Getting Started  
-
-
-
-### Prerequisites  ### Prerequisites  
-
-- Node.js v16+  - Node.js v16+  
-
-- npm or yarn  - npm or yarn  
-
-- Git  - Git  
-
-
-
-### Installation  ### Installation  
-
-```bash```bash
-
-git clone https://github.com/fact-amrita/FACT_25_recruitment.gitgit clone https://github.com/fact-amrita/FACT_25_recruitment.git
-
-cd FACT_25_recruitmentcd FACT_25_recruitment
-
-npm installnpm install
-
-npm run devnpm run dev
-
-```|---------|---------|---------|
-
-Open http://localhost:8080 in your browser.| **Tailwind CSS** | 3.4.17 | Utility-first CSS framework |
-
-| **shadcn/ui** | Latest | Modern React component library |
-
----| **Radix UI** | Various | Accessible, unstyled UI primitives |
-
-| **Framer Motion** | 12.23.12 | Smooth animations and transitions |
-
-## 📁 Project Structure  | **Lucide React** | 0.462.0 | Beautiful, customizable icons |
-
-```
-
-FACT_25_recruitment/### Form Handling & Validation
-
-├── public/           # Static assets (logos, robots.txt)
-
-├── src/| Library | Version | Purpose |
-
-│   ├── components/   # Reusable UI components|---------|---------|---------|
-
-│   ├── hooks/        # Custom hooks| **React Hook Form** | 7.61.1 | Performant form management |
-
-│   ├── lib/          # Utility functions| **Zod** | 3.25.76 | TypeScript-first schema validation |
-
-│   ├── pages/        # App pages| **@hookform/resolvers** | 3.10.0 | Form validation resolvers |
-
-│   ├── App.tsx       # Root component
-
-│   └── main.tsx      # Entry point### State Management & Data
-
-├── vite.config.ts    # Vite config
-
-├── tailwind.config.ts# Tailwind config| Library | Version | Purpose |
-
-└── package.json      # Dependencies & scripts|---------|---------|---------|
-
-```| **TanStack Query** | 5.83.0 | Powerful data synchronization |
-
-| **React Context** | Built-in | Global state management |
+</div>
 
 ---
+
+## 📖 About
+
+The FACT 2025 Recruitment Portal is an interactive web experience designed to recruit new members from the 2025 batch for the **FACT Community** (Forensics and CyberSecurity Club). The application features a unique detective-themed interface where candidates solve cases and submit evidence, creating an engaging recruitment process that reflects the club's focus on forensics and cybersecurity.
+
+### ✨ Key Features
+
+- 🕵️ **Interactive Case-Based Interface** - Solve mysteries and gather evidence
+- ⏱️ **Real-time Timer System** - Track progress with dynamic countdowns
+- 📊 **Evidence Dashboard** - Comprehensive case file management
+- 📱 **Responsive Design** - Seamless experience across all devices
+- 🎨 **Modern UI/UX** - Clean, professional interface with smooth animations
+- 🔒 **Form Validation** - Robust submission handling with Zod validation
+- 💾 **Local Storage** - Persistent state management
+- 🌙 **Theme Support** - Dark/light mode compatibility
+
+---
+
+## 🛠️ Tech Stack
+
+### Core Technologies
+
+| Technology | Version | Purpose |
+|------------|---------|---------|
+| **React** | 18.3.1 | Frontend framework for building interactive UIs |
+| **TypeScript** | 5.8.3 | Type-safe JavaScript for better development experience |
+| **Vite** | 5.4.19 | Fast build tool and development server |
+| **React Router DOM** | 6.30.1 | Client-side routing and navigation |
+
+### UI & Styling
+
+| Library | Version | Purpose |
+|---------|---------|---------|
+| **Tailwind CSS** | 3.4.17 | Utility-first CSS framework |
+| **shadcn/ui** | Latest | Modern React component library |
+| **Radix UI** | Various | Accessible, unstyled UI primitives |
+| **Framer Motion** | 12.23.12 | Smooth animations and transitions |
+| **Lucide React** | 0.462.0 | Beautiful, customizable icons |
+
+### Form Handling & Validation
+
+| Library | Version | Purpose |
+|---------|---------|---------|
+| **React Hook Form** | 7.61.1 | Performant form management |
+| **Zod** | 3.25.76 | TypeScript-first schema validation |
+| **@hookform/resolvers** | 3.10.0 | Form validation resolvers |
+
+### State Management & Data
+
+| Library | Version | Purpose |
+|---------|---------|---------|
+| **TanStack Query** | 5.83.0 | Powerful data synchronization |
+| **React Context** | Built-in | Global state management |
 
 ### UI Components & Libraries
 
-## 🎨 Design System  
-
 <details>
+<summary>📦 Complete Component Library List</summary>
 
-- **Colors**: Dark detective blues + neutral accents  <summary>📦 Complete Component Library List</summary>
-
-- **Typography**: Clean, modern fonts (Inter, Poppins)  
-
-- **Layout**: 8px spacing grid, fully responsive  - **@radix-ui/react-accordion** - Collapsible content sections
-
-- **Accessibility**: WCAG 2.1 AA compliance  - **@radix-ui/react-alert-dialog** - Modal dialogs for confirmations
-
+- **@radix-ui/react-accordion** - Collapsible content sections
+- **@radix-ui/react-alert-dialog** - Modal dialogs for confirmations
 - **@radix-ui/react-avatar** - User profile images
-
----- **@radix-ui/react-checkbox** - Form checkboxes
-
+- **@radix-ui/react-checkbox** - Form checkboxes
 - **@radix-ui/react-dialog** - Modal overlays
-
-## 🤝 Contributing  - **@radix-ui/react-dropdown-menu** - Context menus
-
+- **@radix-ui/react-dropdown-menu** - Context menus
 - **@radix-ui/react-navigation-menu** - Navigation components
-
-We welcome contributions!  - **@radix-ui/react-popover** - Floating content
-
+- **@radix-ui/react-popover** - Floating content
 - **@radix-ui/react-progress** - Progress indicators
-
-1. Fork the repo  - **@radix-ui/react-scroll-area** - Custom scrollbars
-
-2. Create a branch (`feature/my-feature`)  - **@radix-ui/react-select** - Dropdown selections
-
-3. Commit with clear messages  - **@radix-ui/react-slider** - Range inputs
-
-4. Open a Pull Request  - **@radix-ui/react-tabs** - Tab navigation
-
+- **@radix-ui/react-scroll-area** - Custom scrollbars
+- **@radix-ui/react-select** - Dropdown selections
+- **@radix-ui/react-slider** - Range inputs
+- **@radix-ui/react-tabs** - Tab navigation
 - **@radix-ui/react-toast** - Notification system
+- **@radix-ui/react-tooltip** - Helpful hints
 
----- **@radix-ui/react-tooltip** - Helpful hints
+</details>
 
+### Charts & Visualization
 
-
-## 📄 License  </details>
-
-
-
-Licensed under the **MIT License** – see [LICENSE](LICENSE).  ### Charts & Visualization
-
-
-
----| Library | Version | Purpose |
-
+| Library | Version | Purpose |
 |---------|---------|---------|
+| **Recharts** | 2.15.4 | Composable charting library |
 
-## 🏢 About FACT  | **Recharts** | 2.15.4 | Composable charting library |
+### Development Tools
 
-
-
-**FACT (Forensics and CyberSecurity Club)** is a student-led community exploring:  ### Development Tools
-
-
-
-- 🔍 Digital Forensics  | Tool | Version | Purpose |
-
-- 🛡️ Cybersecurity  |------|---------|---------|
-
-- 🐛 Ethical Hacking  | **ESLint** | 9.32.0 | Code linting and formatting |
-
-- 🔐 Cryptography  | **PostCSS** | 8.5.6 | CSS processing |
-
-- 🌐 Network Security  | **Autoprefixer** | 10.4.21 | CSS vendor prefixing |
-
+| Tool | Version | Purpose |
+|------|---------|---------|
+| **ESLint** | 9.32.0 | Code linting and formatting |
+| **PostCSS** | 8.5.6 | CSS processing |
+| **Autoprefixer** | 10.4.21 | CSS vendor prefixing |
 | **TypeScript ESLint** | 8.38.0 | TypeScript-specific linting rules |
-
----
 
 ### Build & Deployment
 
-## 📞 Contact  
-
 | Tool | Version | Purpose |
+|------|---------|---------|
+| **GitHub Pages** | 6.3.0 | Static site deployment |
+| **SWC** | Latest | Fast TypeScript/JavaScript compiler |
 
-- **Organization**: [FACT Community](https://github.com/fact-amrita)  |------|---------|---------|
+---
 
-- **Repo**: [FACT_25_recruitment](https://github.com/fact-amrita/FACT_25_recruitment)  | **GitHub Pages** | 6.3.0 | Static site deployment |
+## 🚀 Getting Started
 
-- **Issues**: [Report a bug](https://github.com/fact-amrita/FACT_25_recruitment/issues)  | **SWC** | Latest | Fast TypeScript/JavaScript compiler |
-
-
-
-------
-
-
-
-<div align="center">## 🚀 Getting Started
-
-
-
-**Made with ❤️ by the FACT Community**  ### Prerequisites
-
-*Empowering the next generation of cybersecurity professionals*
+### Prerequisites
 
 - **Node.js** (v16 or higher)
-
-</div>- **npm** or **yarn**
+- **npm** or **yarn**
 - **Git**
 
 ### Installation
@@ -416,3 +274,4 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 *Empowering the next generation of cybersecurity professionals*
 
 </div>
+
