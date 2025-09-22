@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![FACT Logo](./Fact_Logo.png)
+![FACT Logo](./FACT_Logo_V2.png)
 
 **An immersive detective-themed recruitment portal for FACT Community - Forensics and CyberSecurity Club**
 
@@ -274,4 +274,5 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 *Empowering the next generation of cybersecurity professionals*
 
 </div>
+
 
