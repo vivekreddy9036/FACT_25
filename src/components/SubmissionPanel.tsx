@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,8 @@ import { Loader2, Send } from "lucide-react";
 
 interface SubmissionPanelProps {
   isEnabled: boolean;
+  onSubmitted?: () => void;
+  isSubmitted?: boolean;
 }
 
 interface FormData {
@@ -26,7 +28,7 @@ interface FormData {
 const SUBMIT_URL =
   "https://script.google.com/macros/s/AKfycbyWH5cLoq7JHmzpP6PBlSo7JhfwO30FoMOxvT4IaWg9BLunFOLD91F_KHcWpqQYTjeukQ/exec";
 
-export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
+function SubmissionPanel({ isEnabled, onSubmitted, isSubmitted }: SubmissionPanelProps) {
   const [formData, setFormData] = useState<FormData>({
     conclusion: "",
     reasoning: "",
@@ -37,8 +39,15 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
     consent: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (localStorage.getItem('fact_isSubmitted') === 'true') {
+      setAlreadySubmitted(true);
+    }
+  }, []);
 
   const conclusions = [
     { value: "Krishn", label: "Krishn" },
@@ -108,26 +117,76 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
     }
 
     document.body.appendChild(form);
+    // If we have a ref to the hidden iframe, wait for its load event to mark success.
+    const iframe = iframeRef.current || document.getElementsByName("hidden_iframe")?.[0] as HTMLIFrameElement | undefined;
+
+    let handled = false;
+    const cleanup = () => {
+      try {
+        if (form.parentNode) form.parentNode.removeChild(form);
+      } catch (err) {
+        // ignore
+      }
+      if (iframe) {
+        try {
+          iframe.removeEventListener("load", onLoad);
+        } catch (err) {
+          // ignore
+        }
+      }
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+
+    const onLoad = () => {
+      if (handled) return;
+      handled = true;
+      setIsSubmitting(false);
+      localStorage.setItem('fact_isSubmitted', 'true');
+      setAlreadySubmitted(true);
+      if (onSubmitted) onSubmitted();
+
+      toast({
+        title: "Success",
+        description: "Report submitted to us. Thank you!, please wait to hear back from us.",
+      });
+
+      cleanup();
+    };
+
+    // Fallback timeout if iframe doesn't load (network error or blocked)
+    const timeoutId = window.setTimeout(() => {
+      if (handled) return;
+      handled = true;
+      setIsSubmitting(false);
+      toast({
+        title: "Submission timed out",
+        description: "We could not confirm submission. Please try again or contact the organizers.",
+        variant: "destructive",
+      });
+      cleanup();
+    }, 10000);
+
+    if (iframe) {
+      try {
+        iframe.addEventListener("load", onLoad);
+      } catch (err) {
+        // ignore and rely on timeout
+      }
+    }
+
     form.submit();
-    document.body.removeChild(form);
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-
-    toast({
-      title: "Success",
-      description: "Report submitted to us. Thank you!, please wait to hear back from us.",
-    });
   };
 
-  if (!isEnabled) {
+  if (!isEnabled || alreadySubmitted) {
     return (
       <section className="py-16">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <Card className="border-muted">
             <CardContent className="pt-6">
               <p className="text-muted-foreground">
-                Review all evidence to unlock the submission panel
+                {alreadySubmitted
+                  ? "You have already submitted your report. Further submissions are not allowed."
+                  : "Review all evidence to unlock the submission panel"}
               </p>
             </CardContent>
           </Card>
@@ -137,27 +196,29 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
   }
 
   return (
-    <section className="py-16 cyber-grid">
+    <section
+      className={
+        isSubmitted
+          ? "py-16 cyber-grid bg-background min-h-screen"
+          : "py-16 cyber-grid"
+      }
+    >
       <div className="max-w-2xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-4">
-          <h2 className="text-3xl md:text-4xl font-orbitron font-bold bg-gradient-to-r from-primary to-forensic-red bg-clip-text text-transparent">
-            Submit Findings
-          </h2>
-          <div className="h-px w-24 bg-gradient-to-r from-primary to-forensic-red mx-auto"></div>
+          <h2 className="text-4xl md:text-5xl font-orbitron font-bold text-[#ff3c3c] tracking-wide" style={{letterSpacing: '0.04em'}}>Submit Findings</h2>
+          <div className="h-px w-24 bg-gradient-to-r from-[#ff3c3c] to-[#ff3c3c] mx-auto"></div>
         </div>
 
-        <Card className="border-primary/30 bg-card/80 backdrop-blur-sm animate-slide-up">
+        <Card className="border border-neutral-700 bg-[#18171c]/95 shadow-lg animate-slide-up">
           <CardHeader>
-            <CardTitle className="font-orbitron text-xl text-center">
-              Case Analysis Report
-            </CardTitle>
+            <CardTitle className="font-orbitron text-2xl text-white text-center tracking-wide">Case Analysis Report</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className={isSubmitted ? "flex flex-col justify-center items-center min-h-[300px] space-y-6" : "space-y-6"}>
             {isSubmitted ? (
-              <div className="text-center py-12">
-                <h3 className="text-2xl font-bold text-green-400 mb-4">Thank you for your submission!</h3>
-                <p className="text-lg text-muted-foreground">
-                  Your report has been received. Good luck, Investigator.
+              <div className="text-center">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4" style={{color:'#1aff89'}}>Thank you for your submission!</h3>
+                <p className="text-lg text-gray-300 tracking-wide" style={{letterSpacing: '0.02em'}}>
+                  YOUR REPORT HAS BEEN RECEIVED. GOOD LUCK, INVESTIGATOR.
                 </p>
               </div>
             ) : (
@@ -302,7 +363,9 @@ export function SubmissionPanel({ isEnabled }: SubmissionPanelProps) {
       </div>
 
       {/* Hidden iframe for form submission */}
-      <iframe name="hidden_iframe" style={{ display: "none" }} />
+      <iframe ref={iframeRef} name="hidden_iframe" style={{ display: "none" }} />
     </section>
   );
 }
+
+export { SubmissionPanel };

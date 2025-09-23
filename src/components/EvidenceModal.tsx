@@ -196,3 +196,23 @@ export function ChatTranscriptEvidence() {
     </div>
   );
 }
+
+export function CaseBriefEvidence() {
+  return (
+    <div className="space-y-4">
+      <div className="bg-card/80 backdrop-blur-sm border border-border rounded-lg p-6 md:p-8">
+        <h3 className="text-lg font-orbitron font-bold">CASE BRIEF</h3>
+        <div className="h-px w-24 bg-gradient-to-r from-primary to-forensic-red my-3"></div>
+        <p className="text-sm leading-relaxed">
+          Last night at 02:13 AM, Falcon Corp suffered a data breach. Their research on an advanced AI defense system, codenamed Black Ice, was stolen. The attackers left almost no trace… almost.
+        </p>
+        <p className="text-sm leading-relaxed">
+          Your task: uncover who is behind the breach, how they got in, and what their real motive was. Suspects may be insiders but nothing is what it seems.
+        </p>
+        <p className="text-sm leading-relaxed">
+          Time is limited. Proceed to evidence.
+        </p>
+      </div>
+    </div>
+  );
+}

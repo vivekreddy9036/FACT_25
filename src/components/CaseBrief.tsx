@@ -12,7 +12,7 @@ export function CaseBrief({ onAcceptMission }: CaseBriefProps) {
 
   const paragraphs = [
     "Last night at 02:13 AM, Falcon Corp suffered a data breach. Their research on an advanced AI defense system, codenamed Black Ice, was stolen. The attackers left almost no trace… almost.",
-    "Your task: uncover who is behind the breach, how they got in, and what their real motive was. Suspects may be insiders—but nothing is what it seems.",
+    "Your task: uncover who is behind the breach, how they got in, and what their real motive was. Suspects may be insiders but nothing is what it seems.",
     "Time is limited. Proceed to evidence."
   ];
 
